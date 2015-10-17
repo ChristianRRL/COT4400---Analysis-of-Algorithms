@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\usepackage{amsfonts, amsmath, amsthm, graphicx, color}
+\usepackage[boxed,linesnumbered]{algorithm2e}
+\DontPrintSemicolon
+\SetArgSty{}
+
+\title{Lecture 7 Scratchwork}
+\author{COT 4400, Fall 2015}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\T}{\textbf{true}}
+\newcommand{\F}{\textbf{false}}
+\newcommand{\liff}{\leftrightarrow}
+
+\definecolor{dkred}{rgb}{0.5,0,0}
+\newcommand{\ans}[1]{}
+%\newcommand{\ans}[1]{\color{dkred}\textbf{Answer:} #1\color{black}}
+
+\newtheorem{counterexample}{Counterexample}
+
+\begin{document}
+\maketitle
+
+Identify and prove a tight upper bound on the worst-case time complexity of Insertion Sort (below).
+
+\begin{algorithm}
+\KwIn{$data$:  an array of integers to sort}
+\KwIn{$n$:     the number of values in data}
+\KwOut{permutation of $data$ such that $data[1] \leq \ldots \leq data[n]$}
+\TitleOfAlgo{Selection Sort}
+\If{$n > 1$} %line 1
+{
+  Call Insertion Sort on $data[1..n-1]$\; %line 2
+  Let $ins = data[n]$\; %line 3
+  Let $j$ = last index of $data[1..n-1] \leq ins$\; %line 4
+  Shift $data[j+1..n-1]$ to the right one space\; %line 5
+  $data[j+1] = ins$\; %line 6
+}
+\Return{$data$}\; %line 8
+\end{algorithm}
+
+%Identify the recurrence
+\textbf{Goal:}  Define $T(n)$ in terms of $T(n-1)$ and $n$.
+
+Base case:  $T(1) = O(1)$
+
+Recursive case:  Line 2 takes $T(n-1)$ time (calls Insertion Sort on array of length $n-1$).
+\begin{align*}
+T(n) & =  T(n-1) + 2O(n) + 3O(1)\\
+& = T(n-1) + O(n)
+\end{align*}
+
+%Solve the recurrence
+Now we solve the recurrence $T(n) = T(n-1) + O(n)$:
+
+Char. eqn:  $c(x) = x - 1 = 0$
+
+Roots:  $x = 1$
+
+General form of sol'n:  $T(n) = O(1^n) + O(n^mf(n))$
+
+$m = 1$, so $T(n) = O(1) + n^1O(n)$
+
+$T(n) = O(1) + O(n^2) = O(n^2)$
+
+\end{document}
