@@ -1,6 +1,8 @@
 #include "SortingHelper.h"
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+
 using namespace std;
 
 /**

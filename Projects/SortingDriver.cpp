@@ -1,6 +1,9 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
+#include <stdlib.h>
+// #include <stdio.h>
+#include <fstream>
 using namespace std;
 
 #include "Sorting.h"
@@ -11,7 +14,7 @@ enum input_t {INCREASING, DECREASING, CONSTANT, RANDOM};
 
 #define DEFAULT_N     1000
 #define DEFAULT_ALG   MERGE
-#define DEFAULT_INPUT DECREASING
+#define DEFAULT_INPUT RANDOM
 
 #define N_ARG         1
 #define ALG_ARG       2
@@ -118,8 +121,7 @@ int main(int argc, char** argv)
     }
 
     //Sort data
-    //printArray(arr, n);
-    start = clock();
+    printArray(data, n);
     switch (alg)
     {
     case SELECTION:
@@ -135,7 +137,7 @@ int main(int argc, char** argv)
       quicksort(data, n);
     }
     timing[i] = clock() - start;
-    //printArray(arr, n);
+    printArray(data, n);
 
     //Verify data is sorted
     if (isSorted(data, n))
