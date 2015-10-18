@@ -9,9 +9,7 @@
 #define __SORTING_H
 
 #include "SortingHelper.h"
-#include <iostream>
-#include <string>
-#include <iterator>
+// #include <iostream>
 
 using namespace std;
 
@@ -29,7 +27,7 @@ void quicksort(T* data, int size);
 template <class T>
 void selectionsort(T* data, int size)
 {
-	printArray(data, size);
+	// printArray(data, size);
 	for (int i = 0; i < size - 1; i++)
 	{
 		for (int j = i + 1; j < size; j++)
@@ -40,7 +38,7 @@ void selectionsort(T* data, int size)
 			}
 		}
 	}
-	printArray(data, size);
+	// printArray(data, size);
 
 }
 
@@ -167,52 +165,12 @@ void mergesort(T* data, int size, T* temp)
 // 	}
 // }
 
-// //Function to sort quicksort 
-// template <class T> int part(T data[], int size)
-// {
-// 	T pivot = data[0];
-// 	int low = 1;
-// 	int high = size;
-// 	while (low < high)
-// 	{
-// 		high--;
-// 		while (data[low] < pivot && low < high)
-// 			low++;
-// 		while (data[high] > pivot && low < high)
-// 			high--;
-// 		if (low < high)
-// 			swap(data[low], data[high]);
-// 	}
-
-// 	if ( low > 0) 
-// 	{
-// 		if (data[low] > pivot)
-// 			low--;
-// 			swap(data[low], data[0]);
-// 	}
-// 	return (low);
-// }
-
-// //Quick Sort 
-// template <class T> void quicksort(T* data, int size)
-// {
-// 	printArray(data, size);
-
-// 	if (size > 1)
-// 	{
-// 		int pivot = part(data, size);
-// 		quicksort(data, pivot);
-// 		cout << "data[0]: " << data[0] << "\tpivot: " << pivot << "\tdata + pivot + 1: " << data[2] << endl;
-// 		quicksort(data + pivot + 1, size - pivot - 1);
-// 	}
-// }
-
 
 template <class T>
 void quicksort(T* data, int size)
 {
-	cout << "Input: ";
-	printArray(data, size);
+	// cout << "Input: ";
+	// printArray(data, size);
 	if (size <= 1)
 	{
 		return;
@@ -221,33 +179,33 @@ void quicksort(T* data, int size)
 
 	int mid = (size + 1) / 2;
 
-	cout << "size: " << size << "\tmid = (size + 1) / 2: " << mid << endl;
+	// cout << "size: " << size << "\tmid=(size+1)/2: " << mid << endl;
 
 	int temp = medianof3(data[0], data[mid], data[size - 1]);
 	int pivot = 0;
 
 	if (temp == 1)
 	{
-		pivot = data[0];
+		pivot = 0;
 	}
 	if (temp == 2)
 	{
-		pivot = data[mid];
+		pivot = mid;
 	}
 	if (temp == 3)
 	{
-		pivot = data[size - 1];
+		pivot = size - 1;
 	}
 
-	cout << "temp: " << temp << endl;
-	cout << "pivot: " << pivot << "\tdata[0]: " << data[0] << "\tdata[mid]: " << data[mid] << "\tdata[size - 1]: " << data[size - 1] << endl;
+	// cout << "temp: " << temp << endl;
+	// cout << "pivot: " << pivot << "\tdata[0]: " << data[0] << "\tdata[mid]: " << data[mid] << "\tdata[size - 1]: " << data[size - 1] << endl;
 
-	cout << "Pre-swap (1):  ";
-	printArray(data, size);
+	// cout << "Pre-swap (1):  ";
+	// printArray(data, size);
 	swap(data[pivot], data[0]);
-	cout << "Post-swap (1): ";
-	printArray(data, size);
-	cin.ignore();
+	// cout << "Post-swap (1): ";
+	// printArray(data, size);
+	// cin.ignore();
 
 	int left = 0;
 	int right = size - 1;
@@ -255,6 +213,8 @@ void quicksort(T* data, int size)
 	// static int var = 0;
 	do
 	{
+		// cout << "Pre-swap (2):  " << "\tleft: " << left << "\tright: " << right << "\t";
+		// printArray(data, size);
 		// cout << "(" << (var + 1) << ") Test " << endl;
 		// cout << "(" << (var + 2) << ") left: " << left << "\tright: " << right << endl;
 		while (left < right && data[left] <= data[0])
@@ -267,12 +227,12 @@ void quicksort(T* data, int size)
 			right--;
 		}
 		// cout << "(" << (var + 4) << ") left: " << left << "\tright: " << right << endl;
-		cout << "Pre-swap (2):  ";
-		printArray(data, size);
+		// cout << "Pre-swap (2):  " << "\tleft: " << left << "\tright: " << right << "\t";
+		// printArray(data, size);
 		swap(data[left], data[right]);
-		cout << "Post-swap (2): ";
-		printArray(data, size);
-		cin.ignore();
+		// cout << "Post-swap (2): " << "\tleft: " << left << "\tright: " << right << "\t";
+		// printArray(data, size);
+		// cin.ignore();
 	}
 	while (!(left >= right));
 	// var = var + 4;
@@ -282,53 +242,20 @@ void quicksort(T* data, int size)
 		left--;
 	}
 
-	cout << "Pre-swap (3):  ";
-	printArray(data, size);
+	// cout << "Pre-swap (3):  ";
+	// printArray(data, size);
 	swap(data[0], data[left]);
-	cout << "Post-swap (3):  ";
-	printArray(data, size);
+	// cout << "Post-swap (3):  ";
+	// printArray(data, size);
 
-	cout << "Left: " << left << endl;
-	cin.ignore();
+	// cout << "Left: " << left << endl;
+	// cin.ignore();
 
-	quicksort(data, left - 1);
+	quicksort(data, left);
 	quicksort(data + left + 1, size - left - 1);
 
-	cout << "Output Result: ";
-	printArray(data, size);
+	// cout << "Output Result: ";
+	// printArray(data, size);
 }
-
-// //ref: https://en.wikipedia.org/wiki/Quicksort
-// template <class T>
-// void partition(data, lo, hi)
-// {
-// 	int pivot = data[lo];
-// 	int i = lo - 1;
-// 	int j = hi + 1;
-
-// 	while (1)
-// 	{
-// 		do
-// 		{
-// 			j--;
-// 		}
-// 		while (data[i] > pivot);
-
-// 		do
-// 		{
-// 			i++;
-// 		}
-// 		while (data[j] < pivot);
-
-// 		if (i < j)
-// 		{
-// 			swap(data[i], data[j]);
-// 		}
-// 		else
-// 		{
-// 			return;
-// 		}
-// 	}
-// }
 
 #endif
