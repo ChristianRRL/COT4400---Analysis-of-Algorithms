@@ -36,120 +36,120 @@ public class SortingDriver
       return;
     }
 
-    // if (args.length > N_ARG)
-    //   n = Integer.parseInt(args[N_ARG]);
+    if (args.length > N_ARG)
+      n = Integer.parseInt(args[N_ARG]);
 
-    // temp = Helper.zeroArray(n);
-    // if (args.length > ALG_ARG)
-    // {
-    //   switch (args[ALG_ARG].charAt(0))
-    //   {
-    //   case 's':
-    //   case 'S':
-    //     alg = sort_t.SELECTION;
-    //     break;
-    //   case 'i':
-    //   case 'I':
-    //     alg = sort_t.INSERTION;
-    //     break;
-    //   case 'm':
-    //   case 'M':
-    //     alg = sort_t.MERGE;
-    //     break;
-    //   case 'q':
-    //   case 'Q':
-    //     alg = sort_t.QUICK;
-    //     break;
-    //   default:
-    //     System.out.printf("Sorting algorithm not recognized\n");
-    //   }
-    // }
+    temp = Helper.zeroArray(n);
+    if (args.length > ALG_ARG)
+    {
+      switch (args[ALG_ARG].charAt(0))
+      {
+      case 's':
+      case 'S':
+        alg = sort_t.SELECTION;
+        break;
+      case 'i':
+      case 'I':
+        alg = sort_t.INSERTION;
+        break;
+      case 'm':
+      case 'M':
+        alg = sort_t.MERGE;
+        break;
+      case 'q':
+      case 'Q':
+        alg = sort_t.QUICK;
+        break;
+      default:
+        System.out.printf("Sorting algorithm not recognized\n");
+      }
+    }
 
-    // if (args.length > INPUT_ARG)
-    // {
-    //   switch (args[INPUT_ARG].charAt(0))
-    //   {
-    //   case 'i': //increasing
-    //   case 'I':
-    //   case 'a': //ascending
-    //   case 'A':
-    //     intype = input_t.INCREASING;
-    //     break;
-    //   case 'd':  //decreasing, descending
-    //   case 'D':
-    //     intype = input_t.DECREASING;
-    //     break;
-    //   case 'c':  //constant
-    //   case 'C':
-    //   case 'z':  //zero
-    //   case 'Z':
-    //     intype = input_t.CONSTANT;
-    //     break;
-    //   case 'r':  //random
-    //   case 'R':
-    //     intype = input_t.RANDOM;
-    //     break;
-    //   default:
-    //     System.out.printf("Input array type not recognized\n");
-    //   }
-    // }
+    if (args.length > INPUT_ARG)
+    {
+      switch (args[INPUT_ARG].charAt(0))
+      {
+      case 'i': //increasing
+      case 'I':
+      case 'a': //ascending
+      case 'A':
+        intype = input_t.INCREASING;
+        break;
+      case 'd':  //decreasing, descending
+      case 'D':
+        intype = input_t.DECREASING;
+        break;
+      case 'c':  //constant
+      case 'C':
+      case 'z':  //zero
+      case 'Z':
+        intype = input_t.CONSTANT;
+        break;
+      case 'r':  //random
+      case 'R':
+        intype = input_t.RANDOM;
+        break;
+      default:
+        System.out.printf("Input array type not recognized\n");
+      }
+    }
 
-    // //Run sorting algorithm 3 times
-    // for (int i = 0; i < 3; i++)
-    // {
-    //   // Initialize data
-    //   switch (intype)
-    //   {
-    //   case INCREASING:
-    //     data = Helper.increasingArray(n);
-    //     break;
-    //   case DECREASING:
-    //     data = Helper.decreasingArray(n);
-    //     break;
-    //   case CONSTANT:
-    //     data = Helper.zeroArray(n);
-    //     break;
-    //   case RANDOM:
-    //   default:
-    //     data = Helper.randomArray(n);
-    //   }
+    //Run sorting algorithm 3 times
+    for (int i = 0; i < 3; i++)
+    {
+      // Initialize data
+      switch (intype)
+      {
+      case INCREASING:
+        data = Helper.increasingArray(n);
+        break;
+      case DECREASING:
+        data = Helper.decreasingArray(n);
+        break;
+      case CONSTANT:
+        data = Helper.zeroArray(n);
+        break;
+      case RANDOM:
+      default:
+        data = Helper.randomArray(n);
+      }
 
-    //   //Sort data
-    //   //Helper.printArray(data);
-    //   start = System.currentTimeMillis();
-    //   switch (alg)
-    //   {
-    //   case SELECTION:
-    //     Sorting.selectionsort(data);
-    //     break;
-    //   case INSERTION:
-    //     Sorting.insertionsort(data);
-    //     break;
-    //   case MERGE:
-    //     Sorting.mergesort(data, 0, n, temp);
-    //     break;
-    //   case QUICK:
-    //     Sorting.quicksort(data, 0, n);
-    //   }
-    //   timing[i] = System.currentTimeMillis() - start;
-    //   //Helper.printArray(data);
+      //Sort data
+      //Helper.printArray(data);
+      start = System.currentTimeMillis();
+      switch (alg)
+      {
+      case SELECTION:
+        Sorting.selectionsort(data);
+        break;
+      case INSERTION:
+        Sorting.insertionsort(data);
+        break;
+      case MERGE:
+        Sorting.mergesort(data, 0, n, temp);
+        break;
+      case QUICK:
+        Sorting.quicksort(data, 0, n);
+      }
+      timing[i] = System.currentTimeMillis() - start;
+      //Helper.printArray(data);
 
-    //   //Verify data is sorted
-    //   if (Helper.isSorted(data))
-    //     System.out.printf("Array successfully sorted.\n");
-    //   else
-    //   {
-    //     System.out.printf("Array incorrectly sorted.\n");
-    //     //Time to debug...
-    //     return;
-    //   }
-    // }
+      //Verify data is sorted
+      if (Helper.isSorted(data))
+        System.out.printf("Array successfully sorted.\n");
+      else
+      {
+        System.out.printf("Array incorrectly sorted.\n");
+        //Time to debug...
+        return;
+      }
+    }
 
-    // //Output timing results
-    // for (int i = 0; i < 3; i++)
-    //   System.out.printf("Attempt %d:   %8d ms\n", i+1, timing[i]);
-    // int med = Helper.medianof3(new Long(timing[0]), new Long(timing[1]), new Long(timing[2]))-1;
-    // System.out.printf("Median time: %8d ms\n", timing[med]);
+    //Output timing results
+    for (int i = 0; i < 3; i++)
+      System.out.printf("Attempt %d:   %8d ms\n", i+1, timing[i]);
+    int med = Helper.medianof3(new Long(timing[0]), new Long(timing[1]), new Long(timing[2]))-1;
+    System.out.printf("Median time: %8d ms\n", timing[med]);
 
     return;
   }
