@@ -11,7 +11,7 @@ enum input_t {INCREASING, DECREASING, CONSTANT, RANDOM};
 
 #define DEFAULT_N     1000
 #define DEFAULT_ALG   MERGE
-#define DEFAULT_INPUT INCREASING
+#define DEFAULT_INPUT DECREASING
 
 #define N_ARG         1
 #define ALG_ARG       2
@@ -56,10 +56,10 @@ int main(int argc, char** argv)
     case 'I':
       alg = INSERTION;
       break;
-    // case 'm':
-    // case 'M':
-    //   alg = MERGE;
-    //   break;
+    case 'm':
+    case 'M':
+      alg = MERGE;
+      break;
     case 'q':
     case 'Q':
       alg = QUICK;
@@ -128,9 +128,9 @@ int main(int argc, char** argv)
     case INSERTION:
       insertionsort(data, n);
       break;
-    // case MERGE:
-    //   mergesort(data, n, temp);
-    //   break;
+    case MERGE:
+      mergesort(data, n, temp);
+      break;
     case QUICK:
       quicksort(data, n);
     }

@@ -20,8 +20,8 @@ using namespace std;
 // void selectionsort(T* data, int size);
 // template <class T>
 // void insertionsort(T* data, int size);
-template <class T>
-void mergesort(T* data, int size, T* temp);
+// template <class T>
+// void mergesort(T* data, int size, T* temp);
 template <class T>
 void quicksort(T* data, int size);
 
@@ -61,11 +61,99 @@ void insertionsort(T* data, int size)
 	// printArray(data, size);
 }
 
-// template <class T>
-// void mergesort(T* data, int size, T* temp)
-// {
+template <class T>
+void mergesort(T* data, int size, T* temp)
+{
+	static int stat = 0;
+	if (stat == 0)
+	{
+		cout << "Original Input: ";
+		for (int i = 0; i < size; i++)
+		{
+			cout << data[i] << " ";
+		}
+		cout << endl;
+		stat++;
+	}
 
-// }
+	if (size > 1)
+	{
+	cin.ignore();
+	printArray(data, size);
+
+		int mid = (size + 1) / 2;
+		T* left;
+		left = new int[mid];
+		// cout << "mid: " << mid << "\tsize: " << size << endl;
+		for (int i = 0; i < mid; i++)
+		{
+			left[i] = data[i];
+			// cout << left[i] << " ";
+		}
+		// cout << endl;
+
+		T* right;
+		right = new int[size - mid];
+		for (int i = mid, j = 0; i < size; i++, j++)
+		{
+
+			right[j] = data[i];
+			// cout << right[j] << " ";
+		}
+		// cout << endl;
+
+		mergesort(left, mid, temp);
+		mergesort(right, size - mid, temp + size - mid - 1);
+
+		int l = 0, r = 0, s = 0;
+		while (l < mid && r < (size - mid))
+		{
+			if (left[l] < right[r])
+			{
+				temp[s] = left[l];
+				l++;
+			}
+			else
+			{
+				temp[s] = right[r];
+				r++;
+			}
+			s++;
+		}
+
+		// for (int i = l, j = s; i < mid - 1 && j < (s + mid - l - 1); i++, j++)
+		for (int i = l; i < mid - 1; i++)
+		{
+			// temp[j] = left[i];
+			for (int j = s; j < (s + mid - l - 1); j++)
+			{
+				temp[j] = left[i];
+			}
+		}
+
+		s = s + mid - l;
+
+		// for (int i = r, int j = s; i < size - mid - 1 && j < s + size - mid - 1 - r; i++, j++)
+		for (int i = r; i < size - mid - 1; i++)
+		{
+			// temp[j] = right[i];
+			for (int j = s; j < s + size - mid - 1 - r; j++)
+			{
+				temp[j] = right[i];
+			}
+		}
+
+		for (int i = 0; i < size - 1; i++)
+		{
+			data[i] = temp[i];
+		}
+
+		// delete [] left;
+		// delete [] right;
+	}
+
+	printArray(data, size);
+}
 
 // //Merge Sort 
 // template <class T> void mergesort(T* data, int size, T* temp)
@@ -130,7 +218,11 @@ void quicksort(T* data, int size)
 		return;
 	}
 
+
 	int mid = (size + 1) / 2;
+
+	cout << "size: " << size << "\tmid = (size + 1) / 2: " << mid << endl;
+
 	int temp = medianof3(data[0], data[mid], data[size - 1]);
 	int pivot = 0;
 
@@ -147,14 +239,12 @@ void quicksort(T* data, int size)
 		pivot = data[size - 1];
 	}
 
+	cout << "temp: " << temp << endl;
 	cout << "pivot: " << pivot << "\tdata[0]: " << data[0] << "\tdata[mid]: " << data[mid] << "\tdata[size - 1]: " << data[size - 1] << endl;
 
 	cout << "Pre-swap (1):  ";
 	printArray(data, size);
-	// if (data[0] >= data[pivot])
-	// {
 	swap(data[pivot], data[0]);
-	// }
 	cout << "Post-swap (1): ";
 	printArray(data, size);
 	cin.ignore();
@@ -197,9 +287,6 @@ void quicksort(T* data, int size)
 	swap(data[0], data[left]);
 	cout << "Post-swap (3):  ";
 	printArray(data, size);
-
-	// static int temp1 = left;
-	// tempLeft1++;
 
 	cout << "Left: " << left << endl;
 	cin.ignore();
