@@ -158,8 +158,8 @@ int main(int argc, char** argv)
     cout <<"Attempt " << i+1 << ":  " << setw(8) << (int) (timing[i] * 1000.0 / CLOCKS_PER_SEC) << " ms\n";
   cout <<  "Median time:     " << setw(8) << (int) (timing[medianof3(timing[0], timing[1], timing[2])-1] * 1000.0 / CLOCKS_PER_SEC) << " ms" << endl;
   mediantime = (int) (timing[medianof3(timing[0], timing[1], timing[2])-1] * 1000.0 / CLOCKS_PER_SEC);
-  csvfile(mediantime, n);
-  cout << "mediantime again: " << mediantime << endl;
+  // csvfile(mediantime, n);
+  // cout << "mediantime again: " << mediantime << endl;
   free(data);
   free(temp);
 

@@ -21,8 +21,8 @@ using namespace std;
 // void insertionsort(T* data, int size);
 // template <class T>
 // void mergesort(T* data, int size, T* temp);
-template <class T>
-void quicksort(T* data, int size);
+// template <class T>
+// void quicksort(T* data, int size);
 
 // Function/Class Implementations
 template <class T>
@@ -63,7 +63,7 @@ void insertionsort(T* data, int size)
 template <class T>
 void mergesort(T* data, int size, T* temp)
 {
-	static int num = 0;
+	// static int num = 0;
 	// num++;
 	// static int stat = 0;
 	// if (stat == 0)
@@ -79,9 +79,9 @@ void mergesort(T* data, int size, T* temp)
 
 	if (size > 1)
 	{
-		num++;
+		// num++;
 	// cin.ignore();
-	printArray(data, size);
+	// printArray(data, size);
 
 		int mid = (size + 1) / 2;
 		T* left = data;
@@ -170,14 +170,14 @@ void mergesort(T* data, int size, T* temp)
 
 		// delete [] left;
 		// delete [] right;
-		num--;
+		// num--;
 	}
 
-	if (num == 0)
-	{
-		cout << "Output: ";
-		printArray(data, size);
-	}
+	// if (num == 0)
+	// {
+	// 	cout << "Output: ";
+	// 	printArray(data, size);
+	// }
 	// else
 	// {
 	// 	cout << "iteration " << num << endl;
