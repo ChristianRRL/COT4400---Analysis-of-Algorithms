@@ -1,13 +1,13 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
-#include <stdlib.h>
-// #include <stdio.h>
-#include <fstream>
 using namespace std;
 
 #include "Sorting.h"
 #include "SortingHelper.h"
+#include <stdlib.h>
+// #include <stdio.h>
+#include <fstream>
 
 enum sort_t  {SELECTION, INSERTION, MERGE, QUICK};
 enum input_t {INCREASING, DECREASING, CONSTANT, RANDOM};
@@ -100,6 +100,8 @@ int main(int argc, char** argv)
       cout << "Input array type not recognized\n";
     }
   }
+
+  // sortall(data, size);
   
   //Run sorting algorithm 3 times
   for (int i = 0; i < 3; i++)
@@ -121,7 +123,7 @@ int main(int argc, char** argv)
     }
 
     //Sort data
-    printArray(data, n);
+    // printArray(data, n);
     switch (alg)
     {
     case SELECTION:
@@ -137,7 +139,7 @@ int main(int argc, char** argv)
       quicksort(data, n);
     }
     timing[i] = clock() - start;
-    printArray(data, n);
+    // printArray(data, n);
 
     //Verify data is sorted
     if (isSorted(data, n))
@@ -151,10 +153,13 @@ int main(int argc, char** argv)
   }
 
   //Output timing results
+  int mediantime = 0;
   for (int i = 0; i < 3; i++)
     cout <<"Attempt " << i+1 << ":  " << setw(8) << (int) (timing[i] * 1000.0 / CLOCKS_PER_SEC) << " ms\n";
   cout <<  "Median time:     " << setw(8) << (int) (timing[medianof3(timing[0], timing[1], timing[2])-1] * 1000.0 / CLOCKS_PER_SEC) << " ms" << endl;
-
+  mediantime = (int) (timing[medianof3(timing[0], timing[1], timing[2])-1] * 1000.0 / CLOCKS_PER_SEC);
+  csvfile(mediantime, n);
+  cout << "mediantime again: " << mediantime << endl;
   free(data);
   free(temp);
 

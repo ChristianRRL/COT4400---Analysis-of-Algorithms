@@ -10,6 +10,7 @@
 
 #include "SortingHelper.h"
 // #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -62,46 +63,35 @@ void insertionsort(T* data, int size)
 template <class T>
 void mergesort(T* data, int size, T* temp)
 {
-	static int stat = 0;
-	if (stat == 0)
-	{
-		cout << "Original Input: ";
-		for (int i = 0; i < size; i++)
-		{
-			cout << data[i] << " ";
-		}
-		cout << endl;
-		stat++;
-	}
+	static int num = 0;
+	// num++;
+	// static int stat = 0;
+	// if (stat == 0)
+	// {
+	// 	cout << "Original Input: ";
+	// 	for (int i = 0; i < size; i++)
+	// 	{
+	// 		cout << data[i] << " ";
+	// 	}
+	// 	cout << endl;
+	// 	stat++;
+	// }
 
 	if (size > 1)
 	{
-	cin.ignore();
+		num++;
+	// cin.ignore();
 	printArray(data, size);
 
 		int mid = (size + 1) / 2;
-		T* left;
-		left = new int[mid];
-		// cout << "mid: " << mid << "\tsize: " << size << endl;
-		for (int i = 0; i < mid; i++)
-		{
-			left[i] = data[i];
-			// cout << left[i] << " ";
-		}
-		// cout << endl;
+		T* left = data;
+		T* right = data + mid;
 
-		T* right;
-		right = new int[size - mid];
-		for (int i = mid, j = 0; i < size; i++, j++)
-		{
-
-			right[j] = data[i];
-			// cout << right[j] << " ";
-		}
-		// cout << endl;
-
+// 		for (int i = 0; i < size; i++) {
+// 		cout << "Test (1) \t temp[" << i << "]: " << temp[i] << endl;
+// }
 		mergesort(left, mid, temp);
-		mergesort(right, size - mid, temp + size - mid - 1);
+		mergesort(right, size - mid, temp + mid);
 
 		int l = 0, r = 0, s = 0;
 		while (l < mid && r < (size - mid))
@@ -119,38 +109,82 @@ void mergesort(T* data, int size, T* temp)
 			s++;
 		}
 
-		// for (int i = l, j = s; i < mid - 1 && j < (s + mid - l - 1); i++, j++)
-		for (int i = l; i < mid - 1; i++)
+		// cout << "l: " << l << "\ts: " << s << "\tmid: " << mid << endl;
+		// cout << "(mid - 1): " << (mid - 1) << "\t(mid - l - 1): " << (mid - l - 1) << endl;
+
+		// cout << "Test (2)" << endl;
+
+		int tempsize1 = mid - 1;
+		for (int i = l, j = s; i <= tempsize1; i++, j++)
 		{
-			// temp[j] = left[i];
-			for (int j = s; j < (s + mid - l - 1); j++)
-			{
-				temp[j] = left[i];
-			}
+			// cout << "temp[" << j << "]: " << temp[j] << "\tleft[" << i << "]: " << left[i] << endl;
+			temp[j] = left[i];
 		}
 
 		s = s + mid - l;
 
-		// for (int i = r, int j = s; i < size - mid - 1 && j < s + size - mid - 1 - r; i++, j++)
-		for (int i = r; i < size - mid - 1; i++)
+		int tempsize2 = size - mid - 1;
+		for (int i = r, j = s; i <= tempsize2; i++, j++)
 		{
-			// temp[j] = right[i];
-			for (int j = s; j < s + size - mid - 1 - r; j++)
-			{
-				temp[j] = right[i];
-			}
+			// cout << "temp[" << j << "]: " << temp[j] << "\tleft[" << i << "]: " << left[i] << endl;
+			temp[j] = right[i];
 		}
 
-		for (int i = 0; i < size - 1; i++)
+		for (int i = 0; i < size; i++)
 		{
 			data[i] = temp[i];
 		}
 
+		// for (int i = l; i < mid - 1; i++)
+		// {
+
+		// }
+
+
+		// // for (int i = l, j = s; i < mid - 1 && j < (s + mid - l - 1); i++, j++)
+		// for (int i = l; i < mid - 1; i++)
+		// {
+		// 	// temp[j] = left[i];
+		// 	for (int j = s; j < (s + mid - l - 1); j++)
+		// 	{
+		// 		temp[j] = left[i];
+		// 	}
+		// }
+
+		// s = s + mid - l;
+
+		// // for (int i = r, int j = s; i < size - mid - 1 && j < s + size - mid - 1 - r; i++, j++)
+		// for (int i = r; i < size - mid - 1; i++)
+		// {
+		// 	// temp[j] = right[i];
+		// 	for (int j = s; j < s + size - mid - 1 - r; j++)
+		// 	{
+		// 		temp[j] = right[i];
+		// 	}
+		// }
+
+		// for (int i = 0; i < size - 1; i++)
+		// {
+		// 	data[i] = temp[i];
+		// }
+
 		// delete [] left;
 		// delete [] right;
+		num--;
 	}
 
-	printArray(data, size);
+	if (num == 0)
+	{
+		cout << "Output: ";
+		printArray(data, size);
+	}
+	// else
+	// {
+	// 	cout << "iteration " << num << endl;
+	// 	printArray(data, size);
+	// }
+
+	//printArray(data, size);
 }
 
 // //Merge Sort 
@@ -258,6 +292,38 @@ void quicksort(T* data, int size)
 	// printArray(data, size);
 }
 
+// template <class T>
+void csvfile(int mediantime, int size)
+{
+	ofstream myfile;
+ 	myfile.open ("example.csv");
+
+ 	myfile << ",SI,SD,SR,SC,II,ID,IR,IC,MI,MD,MR,MC,QI,QD,QR,QC\n";
+ 	// myfile << ",SI,SD,SR,SC\n";
+ 	// myfile << "1000,";
+ 	// for (int i = 0; i < 4, i++)
+ 	// {
+
+ 	// }
+ 	myfile << "2000\n";
+ 	myfile << "3000\n";
+ 	myfile << "4000\n";
+ 	myfile << "5000\n";
+ 	myfile << "6000\n";
+ 	myfile << "7000\n";
+ 	myfile << "8000\n";
+ 	myfile << "9000\n";
+ 	myfile << "10000\n";
+
+ 	for (int i = 0; i < 16; i++)
+ 	{
+
+ 	}
+
+ 	// myfile << "Writing this to a file.\n";
+
+ 	myfile.close();
+}
 
 
 #endif
